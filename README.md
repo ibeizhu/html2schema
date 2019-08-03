@@ -8,16 +8,16 @@ transform html to json schema of React style
 npm i html2schema -S
 ```
 
-![preview](https://img.alicdn.com/tfs/TB1xIUwb8r0gK0jSZFnXXbRRXXa-1227-769.png)
+<img src="https://img.alicdn.com/tfs/TB1nuWUcbY1gK0jSZTEXXXDQVXa-1488-761.png" style="max-width: 700px;">
 
 ## Usage
 
 ```
 import html2schema from 'html2schema';
 
-const html = `<a href="https://github.com/one-gourd/html2schema" target="_blank">
+const html = `<a href="https://github.com/ibzjs/html2schema" target="_blank">
 <img class="img" src="https://img.alicdn.com/tfs/TB1PGNuyxTpK1RjSZFGXXcHqFXa-42-42.png" style="display: inline-block;">
-<span class="text">text</span>
+<span class="text">hello world</span>
 </a>
 `;
 
@@ -31,7 +31,7 @@ output json below
     {
       "component": "a",
       "props": {
-        "href": "https://github.com/one-gourd/html2schema",
+        "href": "https://github.com/ibzjs/html2schema",
         "target": "_blank"
       },
       "children": [
@@ -53,9 +53,9 @@ output json below
           },
           "children": [
             {
-              "component": "gourd.text",
+              "component": "text",
               "props": {
-                "content": "text"
+                "content": "hello world"
               },
               "children": []
             }

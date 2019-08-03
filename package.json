@@ -1,6 +1,6 @@
 {
   "name": "html2schema",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "main": "lib/index.js",
   "scripts": {
     "build": "npx rollup -c rollup.config.js"

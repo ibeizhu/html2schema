@@ -6,33 +6,38 @@
 // import htmlParser from 'html-parse-stringify2';
 import parse from './parse/index';
 
-export const html2schema = (html, useNewSchema = true) => {
+const OPTIONS = {
+  // text node component name
+  textCompName: 'text',
+  // use new schema spec
+  useNewSchema: true,
+};
+
+const html2schema = (html, options = {}) => {
+  options = Object.assign({}, OPTIONS, options);
+
   // schema key config
-  const options = {
+  const htmlTree = parse(html, {
     name: 'component',
     attrs: 'props',
-  };
-  const htmlTree = parse(html, options);
-  let root = {
+  });
+
+  let rootNode = {
     children: htmlTree,
     props: {},
     component: 'div',
-    type: 'tag',
   };
-  return transformTree2Schema(root, useNewSchema);
-};
-
-const transformTree2Schema = (htmlTree, useNewSchema) => {
-  return JSON.stringify(deepTraverseTree(htmlTree, useNewSchema));
+  return JSON.stringify(deepTraverseTree(rootNode, options));
 };
 
 /**
  * deep traverse tree
  * @param node
  * @param useNewSchema
+ * @param textCompName
  * @return {*}
  */
-function deepTraverseTree(node, useNewSchema) {
+function deepTraverseTree(node, { useNewSchema, textCompName }) {
   if (node) {
     let stack = [];
     stack.push(node);
@@ -74,7 +79,7 @@ function deepTraverseTree(node, useNewSchema) {
           item.children = item.children.map(child => {
             if (child.content !== undefined) {
               child = {
-                component: 'gourd.text',
+                component: textCompName,
                 props: {
                   content: child.content,
                 },
